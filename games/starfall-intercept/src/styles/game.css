@@ -1,0 +1,40 @@
+@font-face {
+  font-family: "KenVector Future";
+  src: url("/assets/fonts/kenvector_future.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  font-family: "KenVector Future", Arial, sans-serif;
+  background: #050214;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #050214;
+}
+
+body {
+  display: grid;
+  place-items: center;
+}
+
+#game-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #050214;
+}
+
+#game-container canvas {
+  display: block;
+}

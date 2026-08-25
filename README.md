@@ -1,0 +1,105 @@
+# Phaser Games
+
+這是一個用來建立與管理多個 Phaser 遊戲的工作區。每個遊戲放在 `games/` 下並維持獨立的程式碼、依賴與素材；Codex 可透過工作區內的 Phaser 與 Kenney skills 協助開發。
+
+## 目前狀態
+
+- `games/starfall-intercept/` 是目前的 Phaser 遊戲範例與學生起始專案。
+- `assets-source/` 是本機原始素材暫存區；其中的素材包會被 Git 忽略，只保留 `.gitkeep`。
+- 遊戲實際使用的素材放在各遊戲自己的 `assets/` 目錄，會隨遊戲一起管理。
+- Kenney 搜尋 Skill 不需要原始素材包即可使用。
+
+## 目錄結構
+
+```text
+phaser-games/
+├── games/                       每個遊戲的獨立專案
+│   └── starfall-intercept/      目前的學生起始專案
+├── lessons/                     課程單元、作業與評分規準
+├── shared/                      跨遊戲共用的程式或整理後素材
+├── assets-source/               本機原始素材暫存區，內容不提交 Git
+├── .agents/skills/
+│   ├── kenney-assets-search-skills/
+│   └── <phaser-skill>/
+└── skills-lock.json             已安裝 Phaser skills 的來源與版本資訊
+```
+
+## 建立新遊戲
+
+在 `games/` 中使用 [Phaser 官方建立工具](https://github.com/phaserjs/create-game)：
+
+```bash
+cd games
+npm create @phaserjs/game@latest <game-name>
+```
+
+建立完成後進入遊戲目錄，依該模板產生的 README 安裝依賴並啟動開發環境。每個遊戲應保留自己的 `package.json`、原始碼與素材目錄。
+
+## 學生快速開始
+
+以目前的起始專案為例：
+
+```bash
+cd games/starfall-intercept
+npm ci
+npm run dev
+```
+
+瀏覽器開啟終端機顯示的本機網址即可開始。提交前可以執行：
+
+```bash
+npm test
+npm run build
+```
+
+## 工作區原則
+
+- 每個 `games/<game-name>/` 都是獨立遊戲專案。
+- 遊戲實際使用的素材放在該遊戲的 `assets/`，只複製真正需要的檔案。
+- 多個遊戲共用的程式或整理後素材放在 `shared/`。
+- `assets-source/` 只作為本機暫存區，不讓遊戲直接依賴其中內容。
+- Phaser Scene 用於單一遊戲內的選單、關卡與 UI；不同遊戲維持不同專案。
+
+## Phaser Skills
+
+`.agents/skills/` 內含 Phaser 4 開發 skills，涵蓋遊戲設定、Scenes、素材載入、Sprites、動畫、輸入、物理、Tilemaps、Particles、Tweens、Cameras、Graphics、Filters、音效與 Phaser 3 到 4 的遷移。
+
+開發時直接描述需求即可，例如：
+
+```text
+幫我建立一個 Phaser 4 Scene，加入 Arcade Physics 玩家角色和鍵盤移動。
+```
+
+Codex 會依任務載入對應的 skill，不需要使用者先知道 skill 名稱。
+
+## Kenney 素材搜尋
+
+Kenney 搜尋 Skill 可以根據中文或自然語言需求推薦素材包、確認目前的官方頁面，並在要求時用內建瀏覽器開啟結果或將官方素材包下載到 `assets-source/`。
+
+直接描述遊戲需求即可：
+
+```text
+幫我找適合像素風農場遊戲的角色、作物、地形和 UI 素材，找到後打開首選。
+```
+
+需要下載時必須明確提出：
+
+```text
+幫我找適合像素風農場遊戲的素材，確認首選後下載到 assets-source。
+```
+
+也可以要求比較或搜尋特定素材：
+
+```text
+比較適合太空射擊遊戲的 Kenney 素材包，列出主要素材與官方連結。
+```
+
+使用者不需要知道素材索引、英文搜尋詞或素材包名稱。Skill 內含搜尋所需的精簡參考資料，但最新狀態與網址仍以 [Kenney Assets 官網](https://kenney.nl/assets/)為準。只有使用者明確要求時才會下載；它不會自行捐款、購買、登入或加入收藏。
+
+## 素材管理
+
+需要實際使用素材時，可以要求 Kenney 搜尋 Skill 將官方 ZIP 保存到 `assets-source/`。預設保留原始壓縮檔且不解壓；只有明確要求時才會解壓到獨立素材包目錄。之後只將遊戲需要的檔案整理到對應的 `games/<game-name>/assets/`。`assets-source/` 的內容不會被 Git 追蹤，`assets-source/.gitkeep` 只用來保留空目錄。
+
+## Git 管理
+
+遊戲原始碼、遊戲實際使用的素材、文件與 lockfile 應提交到 Git。`node_modules/`、建置產物、快取、暫存素材與本機設定則由 `.gitignore` 排除。
