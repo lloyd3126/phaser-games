@@ -1,0 +1,12 @@
+{
+  "name": "phaser-games-workspace",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "install:games": "node tools/run-game-script.mjs ci",
+    "test:games": "node tools/run-game-script.mjs test",
+    "build:pages": "node tools/build-pages.mjs",
+    "verify:pages": "node tools/verify-pages.mjs",
+    "test": "npm run test:games && npm run build:pages && npm run verify:pages"
+  }
+}

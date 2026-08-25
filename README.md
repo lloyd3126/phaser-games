@@ -103,3 +103,31 @@ Kenney 搜尋 Skill 可以根據中文或自然語言需求推薦素材包、確
 ## Git 管理
 
 遊戲原始碼、遊戲實際使用的素材、文件與 lockfile 應提交到 Git。`node_modules/`、建置產物、快取、暫存素材與本機設定則由 `.gitignore` 排除。
+
+## GitHub Pages 遊戲網站
+
+這個 repository 會建置成一個靜態遊戲網站：根頁面列出所有遊戲，每個遊戲有獨立介紹頁與可直接遊玩的 Phaser 頁面。
+
+```text
+/
+└── games/
+    └── <game-slug>/
+        ├── index.html       遊戲介紹
+        └── play/index.html  Phaser 遊戲
+```
+
+每個 `games/<game-slug>/` 都必須提供：
+
+- `package.json` 中的 `build` 與 `test` 指令。
+- `game.json`，包含遊戲名稱、簡介、操作、規則與展示圖路徑。
+- `presentation/cover.*` 與至少一張實際遊戲截圖。
+- 可由 Vite 完整輸出到 `dist/` 的 runtime 素材；不要使用部署後會失效的網站根目錄絕對路徑。
+
+在 workspace 根目錄執行完整驗證：
+
+```bash
+npm run install:games
+npm test
+```
+
+`npm test` 會測試所有遊戲、產生 `pages-dist/`，並驗證首頁、介紹頁、遊戲入口、內部連結與必要素材。推送到 `master` 後，`.github/workflows/deploy-pages.yml` 會自動將 `pages-dist/` 發布到 GitHub Pages。

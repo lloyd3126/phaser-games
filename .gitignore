@@ -2,6 +2,7 @@ node_modules/
 dist/
 .vite/
 coverage/
+pages-dist/
 .DS_Store
 *.local
 __pycache__/

@@ -1,43 +1,64 @@
+import backgroundUrl from "../../assets/backgrounds/darkPurple.png?url";
+import shieldEffectUrl from "../../assets/effects/shield1.png?url";
+import scoutUrl from "../../assets/enemies/enemyBlue1.png?url";
+import gunnerUrl from "../../assets/enemies/enemyGreen2.png?url";
+import fontUrl from "../../assets/fonts/kenvector_future.ttf?url";
+import meteorBigUrl from "../../assets/meteors/meteorBrown_big1.png?url";
+import meteorMediumUrl from "../../assets/meteors/meteorBrown_med1.png?url";
+import meteorSmallUrl from "../../assets/meteors/meteorBrown_small1.png?url";
+import boltUrl from "../../assets/powerups/powerupBlue_bolt.png?url";
+import shieldPowerupUrl from "../../assets/powerups/powerupBlue_shield.png?url";
+import playerLaserUrl from "../../assets/projectiles/laserGreen04.png?url";
+import enemyLaserUrl from "../../assets/projectiles/laserRed04.png?url";
+import playerUrl from "../../assets/ships/playerShip1_blue.png?url";
+import lifeUrl from "../../assets/ui/playerLife1_blue.png?url";
+import playerLaserAudioUrl from "../../assets/audio/sfx_laser1.ogg?url";
+import loseAudioUrl from "../../assets/audio/sfx_lose.ogg?url";
+import shieldDownAudioUrl from "../../assets/audio/sfx_shieldDown.ogg?url";
+import shieldUpAudioUrl from "../../assets/audio/sfx_shieldUp.ogg?url";
+import twoToneAudioUrl from "../../assets/audio/sfx_twoTone.ogg?url";
+import zapAudioUrl from "../../assets/audio/sfx_zap.ogg?url";
+
 export const ASSETS = {
   images: {
-    background: ["bg.darkPurple", "assets/backgrounds/darkPurple.png"],
-    player: ["ship.player.blue", "assets/ships/playerShip1_blue.png"],
-    scout: ["enemy.scout.blue", "assets/enemies/enemyBlue1.png"],
-    gunner: ["enemy.gunner.green", "assets/enemies/enemyGreen2.png"],
+    background: ["bg.darkPurple", backgroundUrl],
+    player: ["ship.player.blue", playerUrl],
+    scout: ["enemy.scout.blue", scoutUrl],
+    gunner: ["enemy.gunner.green", gunnerUrl],
     playerLaser: [
       "projectile.laser.player",
-      "assets/projectiles/laserGreen04.png",
+      playerLaserUrl,
     ],
     enemyLaser: [
       "projectile.laser.enemy",
-      "assets/projectiles/laserRed04.png",
+      enemyLaserUrl,
     ],
     meteorSmall: [
       "meteor.brown.small",
-      "assets/meteors/meteorBrown_small1.png",
+      meteorSmallUrl,
     ],
     meteorMedium: [
       "meteor.brown.medium",
-      "assets/meteors/meteorBrown_med1.png",
+      meteorMediumUrl,
     ],
-    meteorBig: ["meteor.brown.big", "assets/meteors/meteorBrown_big1.png"],
-    bolt: ["powerup.bolt", "assets/powerups/powerupBlue_bolt.png"],
+    meteorBig: ["meteor.brown.big", meteorBigUrl],
+    bolt: ["powerup.bolt", boltUrl],
     shieldPowerup: [
       "powerup.shield",
-      "assets/powerups/powerupBlue_shield.png",
+      shieldPowerupUrl,
     ],
-    shieldEffect: ["fx.shield", "assets/effects/shield1.png"],
-    life: ["ui.life.blue", "assets/ui/playerLife1_blue.png"],
+    shieldEffect: ["fx.shield", shieldEffectUrl],
+    life: ["ui.life.blue", lifeUrl],
   },
   audio: {
-    playerLaser: ["sfx.laser.player", "assets/audio/sfx_laser1.ogg"],
-    zap: ["sfx.zap", "assets/audio/sfx_zap.ogg"],
-    twoTone: ["sfx.twoTone", "assets/audio/sfx_twoTone.ogg"],
-    shieldUp: ["sfx.shield.up", "assets/audio/sfx_shieldUp.ogg"],
-    shieldDown: ["sfx.shield.down", "assets/audio/sfx_shieldDown.ogg"],
-    lose: ["sfx.lose", "assets/audio/sfx_lose.ogg"],
+    playerLaser: ["sfx.laser.player", playerLaserAudioUrl],
+    zap: ["sfx.zap", zapAudioUrl],
+    twoTone: ["sfx.twoTone", twoToneAudioUrl],
+    shieldUp: ["sfx.shield.up", shieldUpAudioUrl],
+    shieldDown: ["sfx.shield.down", shieldDownAudioUrl],
+    lose: ["sfx.lose", loseAudioUrl],
   },
-  font: ["font.future", "assets/fonts/kenvector_future.ttf"],
+  font: ["font.future", fontUrl],
 };
 
 export const loadImageAssets = (loader) => {

@@ -1,0 +1,37 @@
+{
+  "title": "Starfall Intercept",
+  "summary": "駕駛戰機守住防線，在三波敵機與隕石攻勢中生存到最後。",
+  "description": [
+    "左右移動、持續向上射擊，優先處理會開火的敵機。",
+    "取得快速射擊與護盾強化，在有限生命內完成全部三個波次。"
+  ],
+  "cover": "presentation/cover.png",
+  "screenshots": [
+    "presentation/screenshots/gameplay.png"
+  ],
+  "tags": ["Arcade", "Shooter", "Keyboard"],
+  "controls": [
+    { "input": "A / D 或 ← / →", "action": "左右移動" },
+    { "input": "Space", "action": "持續射擊" },
+    { "input": "Enter", "action": "開始或重新開始" }
+  ],
+  "rules": [
+    {
+      "title": "遊戲目標",
+      "items": ["完成三波固定編排的攻勢", "生命歸零前摧毀或避開所有威脅"]
+    },
+    {
+      "title": "生命與失敗",
+      "items": ["初始有三條生命", "碰撞、敵方雷射或敵人穿越防線都會造成傷害", "生命歸零時遊戲結束"]
+    },
+    {
+      "title": "敵人與計分",
+      "items": ["Scout：100 分", "Gunner：200 分", "小、中、大隕石：25、50、75 分", "完成一波：250 分"]
+    },
+    {
+      "title": "強化道具",
+      "items": ["Bolt：六秒內提高射速", "Shield：抵擋下一次有效傷害"]
+    }
+  ],
+  "order": 10
+}
