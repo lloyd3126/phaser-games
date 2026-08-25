@@ -37,6 +37,13 @@ for (const slug of gameSlugs) {
   if (occurrences !== 1) {
     throw new Error(`Homepage must contain exactly one ${slug} card; found ${occurrences}.`);
   }
+  const modalId = `game-modal-${slug}`;
+  if (!homepage.includes(`id="${modalId}"`)) {
+    throw new Error(`Homepage is missing the ${slug} game modal.`);
+  }
+  if (!homepage.includes(`data-bs-target="#${modalId}"`)) {
+    throw new Error(`Homepage card is not connected to the ${slug} game modal.`);
+  }
 }
 
 const files = walk(outputDir);

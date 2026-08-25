@@ -126,6 +126,7 @@ const detailTemplate = readFileSync(join(templatesDir, "game-detail.html"), "utf
 const notFoundTemplate = readFileSync(join(templatesDir, "404.html"), "utf8");
 
 const cards = [];
+const modals = [];
 const publicGames = [];
 
 for (const game of games) {
@@ -168,6 +169,9 @@ for (const game of games) {
   const rules = manifest.rules
     .map((rule) => `<p class="mb-3">${escapeHtml(rule.text)}</p>`)
     .join("\n");
+  const modalId = `game-modal-${slug}`;
+  const publicSlug = encodeURIComponent(slug);
+  const coverPath = `games/${publicSlug}/media/${coverName}`;
 
   const screenshotsSection = screenshotPaths.length > 0
     ? [
@@ -208,10 +212,37 @@ for (const game of games) {
     `<div class="d-flex flex-wrap gap-2 mb-3">${tags}</div>`,
     `<h3 class="h5 card-title">${escapeHtml(manifest.title)}</h3>`,
     `<p class="card-text text-body-secondary">${escapeHtml(manifest.summary)}</p>`,
-    `<a class="btn btn-primary mt-auto stretched-link" href="games/${encodeURIComponent(slug)}/">查看遊戲</a>`,
+    `<button type="button" class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#${escapeHtml(modalId)}" aria-controls="${escapeHtml(modalId)}">查看遊戲</button>`,
     "</div>",
     "</article>",
     "</div>",
+  ].join(""));
+
+  modals.push([
+    `<div class="modal fade" id="${escapeHtml(modalId)}" tabindex="-1" aria-labelledby="${escapeHtml(modalId)}-label" aria-hidden="true">`,
+    '<div class="modal-dialog modal-lg modal-dialog-scrollable">',
+    '<div class="modal-content">',
+    '<div class="modal-header">',
+    `<h2 class="modal-title h4" id="${escapeHtml(modalId)}-label">${escapeHtml(manifest.title)}</h2>`,
+    '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="關閉"></button>',
+    '</div>',
+    '<div class="modal-body">',
+    '<div class="ratio ratio-16x9 rounded overflow-hidden bg-dark mb-4">',
+    `<img src="${coverPath}" class="img-fluid object-fit-cover" alt="${escapeHtml(manifest.title)} 遊戲封面">`,
+    '</div>',
+    `<div class="d-flex flex-wrap gap-2 mb-3">${tags}</div>`,
+    `<p class="lead">${escapeHtml(manifest.summary)}</p>`,
+    `<div class="text-body-secondary mb-4">${description}</div>`,
+    '<h2 class="h5 mb-3">遊戲規則</h2>',
+    `<div class="text-body-secondary">${rules}</div>`,
+    '</div>',
+    '<div class="modal-footer">',
+    '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">關閉</button>',
+    `<a class="btn btn-primary" href="games/${publicSlug}/play/">開始遊戲</a>`,
+    '</div>',
+    '</div>',
+    '</div>',
+    '</div>',
   ].join(""));
 
   publicGames.push({
@@ -226,6 +257,7 @@ for (const game of games) {
 writeFileSync(join(outputDir, "index.html"), render(homeTemplate, {
   GAME_COUNT: games.length,
   GAME_CARDS: cards.join("\n"),
+  GAME_MODALS: modals.join("\n"),
 }));
 writeFileSync(join(outputDir, "404.html"), render(notFoundTemplate, {
   SITE_ROOT: siteRoot,
