@@ -92,8 +92,7 @@ const games = gameEntries.map((entry) => {
 
   ["title", "summary", "cover"].forEach((field) => requireText(manifest, field, slug));
   ["description", "tags"].forEach((field) => requireArray(manifest, field, slug));
-  requireTextEntries(manifest, "controls", ["text"], slug);
-  requireTextEntries(manifest, "rules", ["title", "text"], slug);
+  requireTextEntries(manifest, "rules", ["text"], slug);
   if (!packageJson.scripts?.build || !packageJson.scripts?.test) {
     throw new Error(`${slug}/package.json must include build and test scripts.`);
   }
@@ -166,11 +165,8 @@ for (const game of games) {
   const description = manifest.description
     .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
     .join("");
-  const controls = manifest.controls
-    .map((control) => `<p class="mb-2">${escapeHtml(control.text)}</p>`)
-    .join("\n");
   const rules = manifest.rules
-    .map((rule) => `<p class="mb-3"><span class="fw-semibold">${escapeHtml(rule.title)}：</span>${escapeHtml(rule.text)}</p>`)
+    .map((rule) => `<p class="mb-3">${escapeHtml(rule.text)}</p>`)
     .join("\n");
 
   const screenshotsSection = screenshotPaths.length > 0
@@ -197,7 +193,6 @@ for (const game of games) {
     TAGS: tags,
     SUMMARY: escapeHtml(manifest.summary),
     DESCRIPTION: description,
-    CONTROLS: controls,
     RULES: rules,
     SCREENSHOTS_SECTION: screenshotsSection,
   });
