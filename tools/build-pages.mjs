@@ -151,31 +151,10 @@ for (const game of games) {
     .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
     .join("");
   const controls = manifest.controls
-    .map((control) => [
-      '<li class="list-group-item d-flex justify-content-between align-items-center gap-3">',
-      `<span>${escapeHtml(control.action)}</span>`,
-      `<kbd>${escapeHtml(control.input)}</kbd>`,
-      "</li>",
-    ].join(""))
+    .map((control) => `<p class="mb-2">${escapeHtml(control.action)}：${escapeHtml(control.input)}</p>`)
     .join("\n");
   const rules = manifest.rules
-    .map((rule, index) => {
-      const id = `rule-${slug}-${index + 1}`;
-      const items = rule.items
-        .map((item) => `<li>${escapeHtml(item)}</li>`)
-        .join("");
-      const expanded = index === 0;
-      return [
-        '<div class="accordion-item">',
-        '<h3 class="accordion-header">',
-        `<button class="accordion-button${expanded ? "" : " collapsed"}" type="button" data-bs-toggle="collapse" data-bs-target="#${id}" aria-expanded="${expanded}" aria-controls="${id}">${escapeHtml(rule.title)}</button>`,
-        "</h3>",
-        `<div id="${id}" class="accordion-collapse collapse${expanded ? " show" : ""}" data-bs-parent="#rules-accordion">`,
-        `<div class="accordion-body"><ul class="mb-0">${items}</ul></div>`,
-        "</div>",
-        "</div>",
-      ].join("");
-    })
+    .map((rule) => `<p class="mb-2">${escapeHtml(rule.title)}：${rule.items.map(escapeHtml).join("；")}</p>`)
     .join("\n");
 
   const screenshotsSection = screenshotPaths.length > 0
