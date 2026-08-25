@@ -48,6 +48,20 @@ const requireArray = (manifest, field, slug) => {
   }
 };
 
+const requireTextEntries = (manifest, field, fields, slug) => {
+  requireArray(manifest, field, slug);
+  manifest[field].forEach((entry, index) => {
+    if (entry === null || typeof entry !== "object") {
+      throw new Error(`${slug}/game.json ${field}[${index}] must be an object.`);
+    }
+    fields.forEach((entryField) => {
+      if (typeof entry[entryField] !== "string" || !entry[entryField].trim()) {
+        throw new Error(`${slug}/game.json ${field}[${index}] must include a non-empty ${entryField}.`);
+      }
+    });
+  });
+};
+
 const resolveGameFile = (gameDir, relativePath, label) => {
   const resolvedPath = resolve(gameDir, relativePath);
   if (!resolvedPath.startsWith(`${gameDir}${sep}`) || !existsSync(resolvedPath)) {
@@ -77,7 +91,9 @@ const games = gameEntries.map((entry) => {
   const packageJson = JSON.parse(readFileSync(packagePath, "utf8"));
 
   ["title", "summary", "cover"].forEach((field) => requireText(manifest, field, slug));
-  ["description", "tags", "controls", "rules"].forEach((field) => requireArray(manifest, field, slug));
+  ["description", "tags"].forEach((field) => requireArray(manifest, field, slug));
+  requireTextEntries(manifest, "controls", ["text"], slug);
+  requireTextEntries(manifest, "rules", ["title", "text"], slug);
   if (!packageJson.scripts?.build || !packageJson.scripts?.test) {
     throw new Error(`${slug}/package.json must include build and test scripts.`);
   }
@@ -151,10 +167,13 @@ for (const game of games) {
     .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
     .join("");
   const controls = manifest.controls
-    .map((control) => `<p class="mb-2">${escapeHtml(control.action)}：${escapeHtml(control.input)}</p>`)
+    .map((control) => `<p class="mb-2">${escapeHtml(control.text)}</p>`)
     .join("\n");
   const rules = manifest.rules
-    .map((rule) => `<p class="mb-2">${escapeHtml(rule.title)}：${rule.items.map(escapeHtml).join("；")}</p>`)
+    .map((rule) => [
+      `<h3 class="h5 mb-2">${escapeHtml(rule.title)}</h3>`,
+      `<p class="mb-3">${escapeHtml(rule.text)}</p>`,
+    ].join("\n"))
     .join("\n");
 
   const screenshotsSection = screenshotPaths.length > 0
