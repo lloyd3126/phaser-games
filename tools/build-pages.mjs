@@ -170,10 +170,7 @@ for (const game of games) {
     .map((control) => `<p class="mb-2">${escapeHtml(control.text)}</p>`)
     .join("\n");
   const rules = manifest.rules
-    .map((rule) => [
-      `<h3 class="h5 mb-2">${escapeHtml(rule.title)}</h3>`,
-      `<p class="mb-3">${escapeHtml(rule.text)}</p>`,
-    ].join("\n"))
+    .map((rule) => `<p class="mb-3"><span class="fw-semibold">${escapeHtml(rule.title)}：</span>${escapeHtml(rule.text)}</p>`)
     .join("\n");
 
   const screenshotsSection = screenshotPaths.length > 0
