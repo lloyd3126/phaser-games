@@ -210,7 +210,7 @@ for (const game of games) {
     `<p class="card-text text-body-secondary">${escapeHtml(manifest.summary)}</p>`,
     '<div class="d-grid gap-2 mt-auto">',
     `<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#${escapeHtml(modalId)}" aria-controls="${escapeHtml(modalId)}">查看遊戲</button>`,
-    `<a class="btn btn-outline-primary" href="games/${publicSlug}/play/">開始遊戲</a>`,
+    `<a class="btn btn-secondary" href="games/${publicSlug}/play/">開始遊戲</a>`,
     '</div>',
     "</div>",
     "</article>",
