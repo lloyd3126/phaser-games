@@ -3,7 +3,6 @@
   const form = document.querySelector("[data-game-search-form]");
   const cards = [...document.querySelectorAll("[data-game-search-text]")];
   const countBadge = document.querySelector("[data-game-count]");
-  const status = document.querySelector("[data-game-search-status]");
   const emptyState = document.querySelector("[data-game-search-empty]");
 
   if (!input || cards.length === 0) return;
@@ -41,11 +40,6 @@
     });
 
     if (countBadge) countBadge.textContent = `${visibleCount} 款`;
-    if (status) {
-      status.textContent = query
-        ? `找到 ${visibleCount} 款符合搜尋條件的遊戲。`
-        : `共 ${visibleCount} 款遊戲。`;
-    }
     emptyState?.classList.toggle("d-none", visibleCount !== 0);
   };
 
