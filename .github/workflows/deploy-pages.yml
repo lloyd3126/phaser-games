@@ -29,7 +29,12 @@ jobs:
         with:
           node-version: lts/*
           cache: npm
-          cache-dependency-path: games/*/package-lock.json
+          cache-dependency-path: |
+            package-lock.json
+            games/*/package-lock.json
+
+      - name: Install site dependencies
+        run: npm ci
 
       - name: Install game dependencies
         run: npm run install:games

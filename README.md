@@ -106,26 +106,28 @@ Kenney 搜尋 Skill 可以根據中文或自然語言需求推薦素材包、確
 
 ## GitHub Pages 遊戲網站
 
-這個 repository 會建置成一個靜態遊戲網站：根頁面列出所有遊戲，點擊遊戲卡片後會開啟介紹 Modal，Modal 中可以閱讀規則並直接進入 Phaser 遊戲。每個遊戲仍保留獨立介紹網址，方便直接分享或支援既有連結。
+這個 repository 會建置成一個靜態遊戲網站：根頁面列出所有遊戲，點擊遊戲卡片後會開啟介紹 Modal，Modal 中可以閱讀規則並直接進入 Phaser 遊戲。Bootstrap CSS 由 Sass 選擇性編譯，JavaScript 只打包 Modal，兩者都與網站一同發布，不依賴 CDN。網站只發布首頁、404 頁面與遊戲執行入口，不保留獨立介紹頁、`play/` 相容路徑或遊戲目錄 JSON。
 
 ```text
 /
+├── index.html
+├── 404.html
 └── games/
     └── <game-slug>/
-        ├── index.html       遊戲介紹 fallback
-        └── play/index.html  Phaser 遊戲
+        └── index.html  Phaser 遊戲
 ```
 
 每個 `games/<game-slug>/` 都必須提供：
 
 - `package.json` 中的 `build` 與 `test` 指令。
 - `game.json`，包含遊戲名稱、簡介、規則與展示圖路徑。
-- `presentation/cover.*` 與至少一張實際遊戲截圖。
+- `presentation/cover.*` 遊戲封面。
 - 可由 Vite 完整輸出到 `dist/` 的 runtime 素材；不要使用部署後會失效的網站根目錄絕對路徑。
 
 在 workspace 根目錄執行完整驗證：
 
 ```bash
+npm ci
 npm run install:games
 npm test
 ```

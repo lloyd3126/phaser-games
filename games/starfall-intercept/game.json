@@ -2,9 +2,6 @@
   "title": "Starfall Intercept",
   "summary": "駕駛戰機守住防線，在三波敵機與隕石攻勢中生存到最後。",
   "cover": "presentation/cover.png",
-  "screenshots": [
-    "presentation/screenshots/gameplay.png"
-  ],
   "tags": ["Arcade", "Shooter", "Keyboard"],
   "rules": [
     {

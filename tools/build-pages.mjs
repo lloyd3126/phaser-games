@@ -7,12 +7,15 @@ import {
   rmSync,
   writeFileSync,
 } from "node:fs";
-import { basename, extname, join, resolve, sep } from "node:path";
+import { extname, join, resolve, sep } from "node:path";
 import { spawnSync } from "node:child_process";
+import { build as bundle } from "esbuild";
+import * as sass from "sass";
 
 const rootDir = resolve(import.meta.dirname, "..");
 const gamesDir = join(rootDir, "games");
-const templatesDir = join(rootDir, "site", "templates");
+const siteDir = join(rootDir, "site");
+const templatesDir = join(siteDir, "templates");
 const outputDir = join(rootDir, "pages-dist");
 const siteRoot = "/phaser-games/";
 
@@ -98,17 +101,11 @@ const games = gameEntries.map((entry) => {
   }
 
   const coverSource = resolveGameFile(gameDir, manifest.cover, `${slug} cover`);
-  const screenshotSources = (manifest.screenshots ?? []).map((path, index) => ({
-    source: resolveGameFile(gameDir, path, `${slug} screenshot ${index + 1}`),
-    original: path,
-  }));
-
   return {
     slug,
     gameDir,
     manifest,
     coverSource,
-    screenshotSources,
     order: Number.isFinite(manifest.order) ? manifest.order : 999,
   };
 }).sort((a, b) => a.order - b.order || a.manifest.title.localeCompare(b.manifest.title));
@@ -120,32 +117,40 @@ if (games.length === 0) {
 rmSync(outputDir, { recursive: true, force: true });
 mkdirSync(outputDir, { recursive: true });
 writeFileSync(join(outputDir, ".nojekyll"), "");
-cpSync(join(rootDir, "site", "styles.css"), join(outputDir, "styles.css"));
-cpSync(join(rootDir, "site", "catalog-search.js"), join(outputDir, "catalog-search.js"));
+
+const siteAssetsDir = join(outputDir, "assets");
+mkdirSync(siteAssetsDir, { recursive: true });
+const compiledStyles = sass.compile(join(siteDir, "site.scss"), {
+  loadPaths: [join(rootDir, "node_modules")],
+  quietDeps: true,
+  silenceDeprecations: ["import"],
+  style: "compressed",
+});
+writeFileSync(join(siteAssetsDir, "site.css"), compiledStyles.css);
+await bundle({
+  bundle: true,
+  entryPoints: [join(siteDir, "site.js")],
+  format: "iife",
+  minify: true,
+  outfile: join(siteAssetsDir, "site.js"),
+  platform: "browser",
+  target: ["es2020"],
+});
 
 const homeTemplate = readFileSync(join(templatesDir, "home.html"), "utf8");
-const detailTemplate = readFileSync(join(templatesDir, "game-detail.html"), "utf8");
 const notFoundTemplate = readFileSync(join(templatesDir, "404.html"), "utf8");
 
 const cards = [];
 const modals = [];
-const publicGames = [];
 
 for (const game of games) {
-  const { slug, gameDir, manifest, coverSource, screenshotSources } = game;
+  const { slug, gameDir, manifest, coverSource } = game;
   const gameOutputDir = join(outputDir, "games", slug);
   const mediaOutputDir = join(gameOutputDir, "media");
-  const screenshotsOutputDir = join(mediaOutputDir, "screenshots");
-  mkdirSync(screenshotsOutputDir, { recursive: true });
+  mkdirSync(mediaOutputDir, { recursive: true });
 
   const coverName = `cover${extname(coverSource).toLowerCase()}`;
   cpSync(coverSource, join(mediaOutputDir, coverName));
-
-  const screenshotPaths = screenshotSources.map(({ source }, index) => {
-    const name = `${String(index + 1).padStart(2, "0")}-${basename(source)}`;
-    cpSync(source, join(screenshotsOutputDir, name));
-    return `media/screenshots/${encodeURIComponent(name)}`;
-  });
 
   console.log(`\n[${slug}] npm run build -- --base=./`);
   const build = spawnSync("npm", ["run", "build", "--", "--base=./"], {
@@ -160,7 +165,7 @@ for (const game of games) {
   if (!existsSync(join(distDir, "index.html"))) {
     throw new Error(`${slug} build did not produce dist/index.html.`);
   }
-  cpSync(distDir, join(gameOutputDir, "play"), { recursive: true });
+  cpSync(distDir, gameOutputDir, { recursive: true });
 
   const tags = manifest.tags
     .map((tag) => `<span class="badge text-bg-secondary">${escapeHtml(tag)}</span>`)
@@ -173,34 +178,6 @@ for (const game of games) {
   const coverPath = `games/${publicSlug}/media/${coverName}`;
   const searchText = [manifest.title, manifest.summary, ...manifest.tags].join(" ");
 
-  const screenshotsSection = screenshotPaths.length > 0
-    ? [
-      '<section class="mb-5" aria-labelledby="screenshots-heading">',
-      '<h2 class="h4 mb-3" id="screenshots-heading">遊戲畫面</h2>',
-      '<div class="row row-cols-1 row-cols-md-2 g-4">',
-      screenshotPaths.map((path, index) => [
-        '<div class="col">',
-        '<div class="ratio ratio-16x9 rounded overflow-hidden bg-dark">',
-        `<img src="${path}" class="img-fluid object-fit-cover" alt="${escapeHtml(manifest.title)} 遊戲畫面 ${index + 1}" loading="lazy">`,
-        "</div>",
-        "</div>",
-      ].join("")).join(""),
-      "</div>",
-      "</section>",
-    ].join("")
-    : "";
-
-  const detailHtml = render(detailTemplate, {
-    META_DESCRIPTION: escapeHtml(manifest.summary),
-    TITLE: escapeHtml(manifest.title),
-    COVER_PATH: `media/${coverName}`,
-    TAGS: tags,
-    SUMMARY: escapeHtml(manifest.summary),
-    RULES: rules,
-    SCREENSHOTS_SECTION: screenshotsSection,
-  });
-  writeFileSync(join(gameOutputDir, "index.html"), detailHtml);
-
   cards.push([
     `<div class="col" data-game-slug="${escapeHtml(slug)}" data-game-search-text="${escapeHtml(searchText)}">`,
     '<article class="card h-100 shadow-sm">',
@@ -212,7 +189,7 @@ for (const game of games) {
     `<h3 class="h5 card-title">${escapeHtml(manifest.title)}</h3>`,
     `<p class="card-text text-body-secondary">${escapeHtml(manifest.summary)}</p>`,
     '<div class="d-grid gap-2 mt-auto">',
-    `<a class="btn btn-primary" href="games/${publicSlug}/play/">開始遊戲</a>`,
+    `<a class="btn btn-primary" href="games/${publicSlug}/">開始遊戲</a>`,
     `<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#${escapeHtml(modalId)}" aria-controls="${escapeHtml(modalId)}">查看遊戲</button>`,
     '</div>',
     "</div>",
@@ -237,20 +214,12 @@ for (const game of games) {
     `<div class="text-body-secondary">${rules}</div>`,
     '</div>',
     '<div class="modal-footer">',
-    `<a class="btn btn-primary" href="games/${publicSlug}/play/">開始遊戲</a>`,
+    `<a class="btn btn-primary" href="games/${publicSlug}/">開始遊戲</a>`,
     '</div>',
     '</div>',
     '</div>',
     '</div>',
   ].join(""));
-
-  publicGames.push({
-    slug,
-    title: manifest.title,
-    summary: manifest.summary,
-    href: `games/${slug}/`,
-    playHref: `games/${slug}/play/`,
-  });
 }
 
 writeFileSync(join(outputDir, "index.html"), render(homeTemplate, {
@@ -261,6 +230,5 @@ writeFileSync(join(outputDir, "index.html"), render(homeTemplate, {
 writeFileSync(join(outputDir, "404.html"), render(notFoundTemplate, {
   SITE_ROOT: siteRoot,
 }));
-writeFileSync(join(outputDir, "games.json"), `${JSON.stringify(publicGames, null, 2)}\n`);
 
 console.log(`\nBuilt ${games.length} game${games.length === 1 ? "" : "s"} into pages-dist/.`);

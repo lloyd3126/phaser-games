@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
-import { dirname, extname, join, resolve } from "node:path";
+import { dirname, extname, join, resolve, sep } from "node:path";
 
 const rootDir = resolve(import.meta.dirname, "..");
 const gamesDir = join(rootDir, "games");
@@ -20,22 +20,34 @@ const requireFile = (path, label) => {
 requireFile(join(outputDir, "index.html"), "Pages homepage");
 requireFile(join(outputDir, "404.html"), "Pages 404 page");
 requireFile(join(outputDir, ".nojekyll"), "Pages .nojekyll marker");
-requireFile(join(outputDir, "catalog-search.js"), "Catalog search script");
+requireFile(join(outputDir, "assets", "site.css"), "Compiled site styles");
+requireFile(join(outputDir, "assets", "site.js"), "Bundled site script");
+
+if (existsSync(join(outputDir, "games.json"))) {
+  throw new Error("Legacy games.json must not be published.");
+}
+for (const legacyAsset of ["catalog-search.js", "styles.css"]) {
+  if (existsSync(join(outputDir, legacyAsset))) {
+    throw new Error(`Legacy ${legacyAsset} must not be published.`);
+  }
+}
 
 const gameSlugs = readdirSync(gamesDir, { withFileTypes: true })
   .filter((entry) => entry.isDirectory() && existsSync(join(gamesDir, entry.name, "game.json")))
   .map((entry) => entry.name)
   .sort();
 const homepage = readFileSync(join(outputDir, "index.html"), "utf8");
-if (!homepage.includes('data-game-search-input') || !homepage.includes('src="catalog-search.js"')) {
+if (!homepage.includes('data-game-search-input') || !homepage.includes('src="assets/site.js"')) {
   throw new Error("Pages homepage is missing the game search feature.");
 }
 
 for (const slug of gameSlugs) {
-  const detailPath = join(outputDir, "games", slug, "index.html");
-  const playPath = join(outputDir, "games", slug, "play", "index.html");
-  requireFile(detailPath, `${slug} detail page`);
-  requireFile(playPath, `${slug} play page`);
+  const gamePath = join(outputDir, "games", slug, "index.html");
+  requireFile(gamePath, `${slug} game page`);
+
+  if (existsSync(join(outputDir, "games", slug, "play"))) {
+    throw new Error(`${slug} legacy play directory must not be published.`);
+  }
 
   const occurrences = homepage.split(`data-game-slug="${slug}"`).length - 1;
   if (occurrences !== 1) {
@@ -57,6 +69,10 @@ if (searchTextCards !== gameSlugs.length) {
 
 const files = walk(outputDir);
 const htmlFiles = files.filter((path) => extname(path) === ".html");
+const publishedHtml = htmlFiles.map((path) => readFileSync(path, "utf8")).join("\n");
+if (/cdn\.jsdelivr\.net\/npm\/bootstrap|bootstrap(?:\.bundle)?\.min\.(?:css|js)/.test(publishedHtml)) {
+  throw new Error("Published HTML must use locally compiled Bootstrap assets.");
+}
 const missingLinks = [];
 const rootAbsoluteLinks = [];
 
@@ -87,18 +103,22 @@ if (missingLinks.length > 0) {
   throw new Error(`Broken local links:\n${missingLinks.join("\n")}`);
 }
 
-const playFiles = files.filter((path) => path.includes(`${join("games", "starfall-intercept", "play")}`));
-const playText = playFiles
+const runtimeDir = join(outputDir, "games", "starfall-intercept");
+const mediaPrefix = `${join(runtimeDir, "media")}${sep}`;
+const runtimeFiles = files.filter((path) => (
+  path.startsWith(`${runtimeDir}${sep}`) && !path.startsWith(mediaPrefix)
+));
+const runtimeText = runtimeFiles
   .filter((path) => new Set([".html", ".css", ".js"]).has(extname(path).toLowerCase()))
   .map((path) => readFileSync(path, "utf8"))
   .join("\n");
-const hasPngAsset = playFiles.some((path) => extname(path).toLowerCase() === ".png")
-  || playText.includes("data:image/png;base64,");
+const hasPngAsset = runtimeFiles.some((path) => extname(path).toLowerCase() === ".png")
+  || runtimeText.includes("data:image/png;base64,");
 if (!hasPngAsset) {
   throw new Error("starfall-intercept build is missing PNG assets.");
 }
 for (const extension of [".ogg", ".ttf"]) {
-  if (!playFiles.some((path) => extname(path).toLowerCase() === extension)) {
+  if (!runtimeFiles.some((path) => extname(path).toLowerCase() === extension)) {
     throw new Error(`starfall-intercept build is missing ${extension} assets.`);
   }
 }

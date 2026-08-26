@@ -8,5 +8,10 @@
     "build:pages": "node tools/build-pages.mjs",
     "verify:pages": "node tools/verify-pages.mjs",
     "test": "npm run test:games && npm run build:pages && npm run verify:pages"
+  },
+  "devDependencies": {
+    "bootstrap": "5.3.8",
+    "esbuild": "0.28.2",
+    "sass": "1.103.1"
   }
 }
