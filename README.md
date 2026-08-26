@@ -132,4 +132,4 @@ npm run install:games
 npm test
 ```
 
-`npm test` 會測試所有遊戲、產生 `pages-dist/`，並驗證首頁、介紹頁、遊戲入口、內部連結與必要素材。推送到 `master` 後，`.github/workflows/deploy-pages.yml` 會自動將 `pages-dist/` 發布到 GitHub Pages。
+`npm test` 會測試所有遊戲、產生 `pages-dist/`，並驗證首頁、介紹頁、遊戲入口、內部連結與必要素材。推送到 `main` 後，`.github/workflows/deploy-pages.yml` 會自動將 `pages-dist/` 發布到 GitHub Pages。
