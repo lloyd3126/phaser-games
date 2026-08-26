@@ -1,0 +1,111 @@
+category_en,category_zh,card_id,english_name,chinese_name,description,use_cases
+Learning Action,學習行為卡,L01,Compare,比較,找出相同與不同,數學、科學、語言
+Learning Action,學習行為卡,L02,Classify,分類,依特徵分群,生物、資料、語言
+Learning Action,學習行為卡,L03,Sequence,排序,建立先後順序,歷史、演算法、流程
+Learning Action,學習行為卡,L04,Match,配對,建立兩者關係,單字、概念、公式
+Learning Action,學習行為卡,L05,Predict,預測,根據規則推測結果,物理、化學、經濟
+Learning Action,學習行為卡,L06,Estimate,估算,快速判斷大約結果,數學、工程
+Learning Action,學習行為卡,L07,Calculate,計算,用規則得到數值,數學、物理
+Learning Action,學習行為卡,L08,Infer,推論,從證據推出答案,科學、閱讀
+Learning Action,學習行為卡,L09,Diagnose,診斷,找出問題原因,工程、醫學概念
+Learning Action,學習行為卡,L10,Debug,除錯,找出錯誤並修正,程式、邏輯
+Learning Action,學習行為卡,L11,Decompose,分解,大問題拆小問題,程式、工程
+Learning Action,學習行為卡,L12,Combine,組合,將元素組成解法,化學、語言、設計
+Learning Action,學習行為卡,L13,Model,建模,建立系統表示,科學、數學
+Learning Action,學習行為卡,L14,Optimize,最佳化,找更有效率解法,工程、數學
+Learning Action,學習行為卡,L15,Evaluate,評估,依標準判斷品質,AI 素養、資訊素養
+Learning Action,學習行為卡,L16,Verify,驗證,用證據確認真偽,科學、媒體識讀
+Learning Action,學習行為卡,L17,Explain,解釋,建立原因與結果,各學科
+Learning Action,學習行為卡,L18,Decide,決策,在限制下做選擇,經濟、公民、工程
+Learning Action,學習行為卡,L19,Transfer,遷移,把知識用到新情境,高階學習
+Learning Action,學習行為卡,L20,Create,創造,產生新的解決方案,STEAM、設計
+Player Verb,玩家操作卡,P01,Move,移動,控制角色位置,空間、路徑
+Player Verb,玩家操作卡,P02,Jump,跳躍,跨越高度或障礙,時序、預測
+Player Verb,玩家操作卡,P03,Dash,衝刺,短距快速移動,時機判斷
+Player Verb,玩家操作卡,P04,Aim,瞄準,選方向或角度,物理
+Player Verb,玩家操作卡,P05,Launch,發射,決定角度與力量,拋射運動
+Player Verb,玩家操作卡,P06,Drag,拖曳,移動物件,分類、配對
+Player Verb,玩家操作卡,P07,Rotate,旋轉,改變方向,幾何、機械
+Player Verb,玩家操作卡,P08,Connect,連接,建立節點關係,電路、網路、概念
+Player Verb,玩家操作卡,P09,Cut,切割,將整體拆分,分數、幾何
+Player Verb,玩家操作卡,P10,Combine,合成,合併物件,化學、數學
+Player Verb,玩家操作卡,P11,Place,放置,把元素放進世界,建構、分類
+Player Verb,玩家操作卡,P12,Switch,切換,改變狀態,邏輯、電路
+Player Verb,玩家操作卡,P13,Route,導流,控制流向,電流、水流、資料
+Player Verb,玩家操作卡,P14,Program,編程,排列指令,程式思維
+Player Verb,玩家操作卡,P15,Select,選擇,從多個方案挑選,判斷、決策
+Player Verb,玩家操作卡,P16,Inspect,檢查,查看隱藏資訊,探索、診斷
+Player Verb,玩家操作卡,P17,Collect,收集,蒐集需要的元素,集合、證據
+Player Verb,玩家操作卡,P18,Allocate,分配,分配有限資源,經濟、管理
+Player Verb,玩家操作卡,P19,Build,建造,組成完整結構,工程、系統
+Player Verb,玩家操作卡,P20,Manipulate,操控,即時改變系統參數,模擬、科學
+World Rule,世界規則卡,W01,Gravity,重力,物體受到向下作用,物理、運動
+World Rule,世界規則卡,W02,Momentum,動量,速度影響後續運動,物理、運動
+World Rule,世界規則卡,W03,Friction,摩擦,材質影響移動,物理、工程
+World Rule,世界規則卡,W04,Force,力,不同力改變運動,物理
+World Rule,世界規則卡,W05,Balance,平衡,系統需維持平衡,物理、生態、系統
+World Rule,世界規則卡,W06,Flow,流動,能量、液體或資料沿路徑移動,電路、水流、資訊
+World Rule,世界規則卡,W07,Conservation,守恆,資源不會憑空增加,物理、化學、資源管理
+World Rule,世界規則卡,W08,Transformation,轉換,A 可以轉成 B,化學、能源、狀態轉換
+World Rule,世界規則卡,W09,Cause–Effect,因果,動作造成後續結果,科學、系統思考
+World Rule,世界規則卡,W10,Chain Reaction,連鎖,一個事件觸發下一個,化學、系統、機關
+World Rule,世界規則卡,W11,Threshold,臨界值,超過某值才發生事件,科學、工程
+World Rule,世界規則卡,W12,Ratio,比例,不同比率導致不同效果,數學、科學
+World Rule,世界規則卡,W13,Probability,機率,結果存在不確定性,數學、決策
+World Rule,世界規則卡,W14,State,狀態,世界具有不同狀態,程式、科學
+World Rule,世界規則卡,W15,Condition,條件,滿足條件才執行,程式、邏輯
+World Rule,世界規則卡,W16,Loop,循環,行為重複執行,程式、週期系統
+World Rule,世界規則卡,W17,Network,網路,節點互相影響,網路、電路、社會系統
+World Rule,世界規則卡,W18,Ecosystem,生態系,多個變數互相制約,生物、環境
+World Rule,世界規則卡,W19,Supply–Demand,供需,數量改變價值,經濟
+World Rule,世界規則卡,W20,Information,資訊限制,玩家只掌握部分資訊,媒體識讀、科學推理
+Challenge,挑戰卡,C01,Time Limit,限時,必須在時間內完成,反應、規劃
+Challenge,挑戰卡,C02,Resource Limit,資源限制,能量或材料有限,資源管理、最佳化
+Challenge,挑戰卡,C03,Action Limit,行動限制,只能操作 N 次,程式、最佳化
+Challenge,挑戰卡,C04,Space Limit,空間限制,可使用空間有限,幾何、建構
+Challenge,挑戰卡,C05,Missing Info,資訊缺失,必須推理未知資訊,推論、查證
+Challenge,挑戰卡,C06,Hidden Rule,隱藏規則,透過實驗找規則,科學探究、歸納
+Challenge,挑戰卡,C07,Noise,干擾資訊,有無關資訊混入,媒體識讀、資料判讀
+Challenge,挑戰卡,C08,Moving Target,動態目標,情境持續改變,預測、適應
+Challenge,挑戰卡,C09,Multiple Goals,多目標,同時兼顧數個要求,系統思考、管理
+Challenge,挑戰卡,C10,Trade-off,取捨,無法所有條件都最佳,工程、經濟、決策
+Challenge,挑戰卡,C11,Risk–Reward,風險報酬,高收益伴隨高風險,機率、決策
+Challenge,挑戰卡,C12,Sequence Dependency,順序依賴,操作順序很重要,演算法、流程
+Challenge,挑戰卡,C13,Chain Dependency,連鎖依賴,前面決策影響後面,系統、歷史因果
+Challenge,挑戰卡,C14,Precision,精準度,需要精確操作,測量、物理
+Challenge,挑戰卡,C15,Timing,時機,必須在正確時間操作,物理、節奏、控制
+Challenge,挑戰卡,C16,Optimization,最佳化,完成還不夠，要更好,工程、程式、數學
+Challenge,挑戰卡,C17,Adaptation,環境變化,舊方法突然不再適用,遷移、彈性思考
+Challenge,挑戰卡,C18,Conflict,衝突條件,兩個要求互相矛盾,決策、倫理、工程
+Challenge,挑戰卡,C19,Unknown Outcome,未知結果,必須根據機率決策,機率、風險
+Challenge,挑戰卡,C20,Transfer,新情境,用舊知識解新問題,遷移學習
+Assessment,隱性評量卡,A01,Accuracy,正確率,最後答案是否正確,成果判斷
+Assessment,隱性評量卡,A02,First Attempt,首次表現,第一次策略是什麼,先備概念、直覺模型
+Assessment,隱性評量卡,A03,Error Pattern,錯誤模式,玩家反覆犯什麼錯,迷思概念診斷
+Assessment,隱性評量卡,A04,Retry Path,修正歷程,失敗後如何修改,形成性評量
+Assessment,隱性評量卡,A05,Strategy,策略,使用哪一類解法,策略辨識
+Assessment,隱性評量卡,A06,Efficiency,效率,使用多少步驟或資源,最佳化、熟練度
+Assessment,隱性評量卡,A07,Hint Use,提示使用,何時需要幫助,鷹架需求
+Assessment,隱性評量卡,A08,Response Time,反應時間,判斷速度如何,熟練度、自動化
+Assessment,隱性評量卡,A09,Transfer,遷移表現,新情境能否應用,遷移能力
+Assessment,隱性評量卡,A10,Mastery,精熟度,多種證據綜合判斷,整體能力估計
+Feedback,回饋卡,F01,Immediate Consequence,即時結果,操作後立刻看到後果,因果、物理、程式
+Feedback,回饋卡,F02,Visual Change,視覺變化,顏色、形狀或狀態改變,分類、化學、系統狀態
+Feedback,回饋卡,F03,Motion Feedback,動態回饋,速度、方向、軌跡改變,物理、數學
+Feedback,回饋卡,F04,Audio Cue,聲音提示,用聲音提示成功、異常或狀態,節奏、語言、狀態判斷
+Feedback,回饋卡,F05,Haptic-like Impact,衝擊感,用停頓、畫面抖動等數位衝擊強調事件,碰撞、重要事件
+Feedback,回饋卡,F06,Prediction Preview,預測預覽,執行前顯示可能結果,物理、數學、系統推理
+Feedback,回饋卡,F07,Before–After Comparison,前後比較,顯示操作前後差異,科學實驗、資料分析
+Feedback,回饋卡,F08,Ghost Replay,幽靈重播,顯示前一次嘗試路徑,動作、最佳化、策略修正
+Feedback,回饋卡,F09,Error Highlight,錯誤標示,標出出錯的位置或節點,程式、電路、流程
+Feedback,回饋卡,F10,Partial Success,部分成功,顯示哪些部分做對、哪些尚未完成,複合任務
+Feedback,回饋卡,F11,Progress Meter,進展顯示,顯示接近目標的程度,最佳化、比例、平衡
+Feedback,回饋卡,F12,System State,系統狀態,顯示溫度、壓力、電流、能量等,STEM
+Feedback,回饋卡,F13,Resource Feedback,資源回饋,顯示資源因決策而增加或消耗,經濟、能源、管理
+Feedback,回饋卡,F14,Cause Trace,因果追蹤,顯示某結果由哪些事件造成,系統思考、歷史、程式
+Feedback,回饋卡,F15,Counterexample,反例回饋,讓錯誤規則在特定情境失效,概念修正
+Feedback,回饋卡,F16,Adaptive Hint,漸進提示,依失敗次數逐步增加提示,鷹架學習
+Feedback,回饋卡,F17,Explain-on-Demand,按需解釋,玩家主動要求才顯示原因,避免過度提示
+Feedback,回饋卡,F18,Strategy Comparison,策略比較,比較不同解法的效率或結果,工程、數學、程式
+Feedback,回饋卡,F19,Delayed Consequence,延遲後果,決策後一段時間才看到影響,生態、經濟、系統
+Feedback,回饋卡,F20,Transfer Feedback,遷移回饋,回饋是否成功把舊知識用到新情境,高階學習

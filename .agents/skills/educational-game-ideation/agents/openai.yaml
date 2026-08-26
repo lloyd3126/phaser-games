@@ -1,0 +1,4 @@
+interface:
+  display_name: "教育遊戲發想"
+  short_description: "使用六類設計卡，把學習目標轉成可玩的 2D 教育遊戲概念"
+  default_prompt: "使用 $educational-game-ideation，把一個學習目標發想成三個可玩的 2D 教育遊戲概念。"

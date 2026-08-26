@@ -20,6 +20,7 @@ phaser-games/
 ├── assets-source/               本機原始素材暫存區，內容不提交 Git
 ├── .agents/skills/
 │   ├── kenney-assets-search-skills/
+│   ├── educational-game-ideation/
 │   └── <phaser-skill>/
 └── skills-lock.json             已安裝 Phaser skills 的來源與版本資訊
 ```
@@ -71,6 +72,22 @@ npm run build
 ```
 
 Codex 會依任務載入對應的 skill，不需要使用者先知道 skill 名稱。
+
+## 教育遊戲發想
+
+`educational-game-ideation` skill 會把學科主題或學習目標，組合成可測試的 2D 教育遊戲概念。它使用學習行為、玩家操作、世界規則、挑戰、隱性評量與回饋六類設計卡，協助比較方向並收斂成最小 Phaser 原型。
+
+使用者可以直接從模糊題目開始，不需要知道卡牌名稱：
+
+```text
+我想做一款讓國中生理解供需關係的 2D 遊戲，帶我發想三個方向。
+```
+
+也可以要求檢查現有概念的學習與玩法是否真的整合：
+
+```text
+我有一款打怪後回答數學題的遊戲，幫我改成數學本身就是核心玩法。
+```
 
 ## Kenney 素材搜尋
 
