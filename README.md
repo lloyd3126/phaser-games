@@ -1,6 +1,6 @@
 # Phaser Games
 
-這是一個用來建立與管理多個 Phaser 遊戲的工作區。每個遊戲放在 `games/` 下並維持獨立的程式碼、依賴與素材；Codex 可透過工作區內的 Phaser 與 Kenney skills 協助開發。
+這是一個用來建立與管理多個 Phaser 遊戲的工作區。每個遊戲放在 `games/` 下並維持獨立的程式碼、依賴與素材；Codex 可透過工作區內的教育遊戲發想、Kenney 素材搜尋與 Phaser skills，從概念一路協助到可玩原型與真人 Playtest。
 
 ## 目前狀態
 
@@ -16,6 +16,9 @@ phaser-games/
 ├── games/                       每個遊戲的獨立專案
 │   └── starfall-intercept/      目前的學生起始專案
 ├── lessons/                     課程單元、作業與評分規準
+├── docs/                        可逐階段使用的遊戲開發工作流程
+│   ├── general-game-workflow.md
+│   └── educational-game-workflow.md
 ├── shared/                      跨遊戲共用的程式或整理後素材
 ├── assets-source/               本機原始素材暫存區，內容不提交 Git
 ├── .agents/skills/
@@ -60,6 +63,20 @@ npm run build
 - 多個遊戲共用的程式或整理後素材放在 `shared/`。
 - `assets-source/` 只作為本機暫存區，不讓遊戲直接依賴其中內容。
 - Phaser Scene 用於單一遊戲內的選單、關卡與 UI；不同遊戲維持不同專案。
+
+## 端到端工作流程
+
+依遊戲目標選擇一條流程，逐階段把對應 Prompt 貼到同一個 Codex task：
+
+- [一般 2D 遊戲開發工作流程](docs/general-game-workflow.md)：先用 Kenney skill 找素材，再進行遊戲企劃、Phaser 技術設計、MVP、真人 Playtest 與迭代。
+- [教育型 2D 遊戲開發工作流程](docs/educational-game-workflow.md)：先用教育遊戲發想 skill 確立學習目標與核心玩法，再用 Kenney skill 尋找支援素材，最後交由 Phaser skills 完成技術設計與實作。
+
+```text
+一般遊戲：Kenney 素材 → 遊戲企劃 → Phaser 技術設計 → MVP → Playtest ↔ Iteration
+教育遊戲：學習目標 → 教育遊戲發想 → Kenney 素材 → Phaser 技術設計 → MVP → Playtest ↔ Iteration
+```
+
+三類 skills 仍可單獨使用；工作流程文件負責在需要完整專案時保存各階段的輸入、輸出與交接關係。
 
 ## Phaser Skills
 
