@@ -4,6 +4,7 @@
   const cards = [...document.querySelectorAll("[data-game-search-text]")];
   const countBadge = document.querySelector("[data-game-count]");
   const emptyState = document.querySelector("[data-game-search-empty]");
+  const totalCount = cards.length;
 
   if (!input || cards.length === 0) return;
 
@@ -39,7 +40,11 @@
       if (visible) visibleCount += 1;
     });
 
-    if (countBadge) countBadge.textContent = `${visibleCount} 款`;
+    if (countBadge) {
+      countBadge.textContent = query
+        ? `${visibleCount} 款 / ${totalCount} 款`
+        : `${totalCount} 款`;
+    }
     emptyState?.classList.toggle("d-none", visibleCount !== 0);
   };
 
