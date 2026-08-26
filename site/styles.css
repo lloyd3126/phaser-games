@@ -1,0 +1,31 @@
+.page-scroll,
+.modal-dialog-scrollable .modal-body {
+  scrollbar-color: rgba(var(--bs-secondary-rgb), 0.72) transparent;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+}
+
+.page-scroll::-webkit-scrollbar,
+.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.page-scroll::-webkit-scrollbar-track,
+.modal-dialog-scrollable .modal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.page-scroll::-webkit-scrollbar-thumb,
+.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
+  min-height: 2.5rem;
+  border: 0.2rem solid transparent;
+  border-radius: 999px;
+  background-color: rgba(var(--bs-secondary-rgb), 0.72);
+  background-clip: content-box;
+}
+
+.page-scroll::-webkit-scrollbar-thumb:hover,
+.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(var(--bs-secondary-rgb), 1);
+}

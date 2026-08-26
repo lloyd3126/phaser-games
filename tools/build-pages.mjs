@@ -120,6 +120,7 @@ if (games.length === 0) {
 rmSync(outputDir, { recursive: true, force: true });
 mkdirSync(outputDir, { recursive: true });
 writeFileSync(join(outputDir, ".nojekyll"), "");
+cpSync(join(rootDir, "site", "styles.css"), join(outputDir, "styles.css"));
 
 const homeTemplate = readFileSync(join(templatesDir, "home.html"), "utf8");
 const detailTemplate = readFileSync(join(templatesDir, "game-detail.html"), "utf8");
