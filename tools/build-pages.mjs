@@ -121,6 +121,7 @@ rmSync(outputDir, { recursive: true, force: true });
 mkdirSync(outputDir, { recursive: true });
 writeFileSync(join(outputDir, ".nojekyll"), "");
 cpSync(join(rootDir, "site", "styles.css"), join(outputDir, "styles.css"));
+cpSync(join(rootDir, "site", "catalog-search.js"), join(outputDir, "catalog-search.js"));
 
 const homeTemplate = readFileSync(join(templatesDir, "home.html"), "utf8");
 const detailTemplate = readFileSync(join(templatesDir, "game-detail.html"), "utf8");
@@ -170,6 +171,7 @@ for (const game of games) {
   const modalId = `game-modal-${slug}`;
   const publicSlug = encodeURIComponent(slug);
   const coverPath = `games/${publicSlug}/media/${coverName}`;
+  const searchText = [manifest.title, manifest.summary, ...manifest.tags].join(" ");
 
   const screenshotsSection = screenshotPaths.length > 0
     ? [
@@ -200,7 +202,7 @@ for (const game of games) {
   writeFileSync(join(gameOutputDir, "index.html"), detailHtml);
 
   cards.push([
-    `<div class="col" data-game-slug="${escapeHtml(slug)}">`,
+    `<div class="col" data-game-slug="${escapeHtml(slug)}" data-game-search-text="${escapeHtml(searchText)}">`,
     '<article class="card h-100 shadow-sm">',
     '<div class="ratio ratio-16x9 bg-dark">',
     `<img src="games/${encodeURIComponent(slug)}/media/${coverName}" class="card-img-top object-fit-cover" alt="${escapeHtml(manifest.title)} 遊戲封面" loading="lazy">`,

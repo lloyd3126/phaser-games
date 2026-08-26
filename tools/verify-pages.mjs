@@ -20,12 +20,16 @@ const requireFile = (path, label) => {
 requireFile(join(outputDir, "index.html"), "Pages homepage");
 requireFile(join(outputDir, "404.html"), "Pages 404 page");
 requireFile(join(outputDir, ".nojekyll"), "Pages .nojekyll marker");
+requireFile(join(outputDir, "catalog-search.js"), "Catalog search script");
 
 const gameSlugs = readdirSync(gamesDir, { withFileTypes: true })
   .filter((entry) => entry.isDirectory() && existsSync(join(gamesDir, entry.name, "game.json")))
   .map((entry) => entry.name)
   .sort();
 const homepage = readFileSync(join(outputDir, "index.html"), "utf8");
+if (!homepage.includes('data-game-search-input') || !homepage.includes('src="catalog-search.js"')) {
+  throw new Error("Pages homepage is missing the game search feature.");
+}
 
 for (const slug of gameSlugs) {
   const detailPath = join(outputDir, "games", slug, "index.html");
@@ -44,6 +48,11 @@ for (const slug of gameSlugs) {
   if (!homepage.includes(`data-bs-target="#${modalId}"`)) {
     throw new Error(`Homepage card is not connected to the ${slug} game modal.`);
   }
+}
+
+const searchTextCards = homepage.split('data-game-search-text="').length - 1;
+if (searchTextCards !== gameSlugs.length) {
+  throw new Error(`Homepage search data must cover every game; found ${searchTextCards} cards for ${gameSlugs.length} games.`);
 }
 
 const files = walk(outputDir);

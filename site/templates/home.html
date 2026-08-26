@@ -21,8 +21,14 @@
         <section aria-labelledby="games-heading">
           <div class="d-flex align-items-center justify-content-between mb-3">
             <h2 class="h4 mb-0" id="games-heading">遊戲列表</h2>
-            <span class="badge text-bg-secondary">{{GAME_COUNT}} 款</span>
+            <span class="badge text-bg-secondary" data-game-count>{{GAME_COUNT}} 款</span>
           </div>
+          <form class="mb-4" role="search" data-game-search-form>
+            <label class="form-label" for="game-search">搜尋遊戲</label>
+            <input class="form-control" id="game-search" type="search" placeholder="輸入遊戲名稱、摘要或標籤" autocomplete="off" data-game-search-input aria-describedby="game-search-status">
+            <div class="form-text" id="game-search-status" data-game-search-status aria-live="polite">共 {{GAME_COUNT}} 款遊戲。</div>
+          </form>
+          <p class="text-body-secondary d-none" data-game-search-empty>找不到符合搜尋條件的遊戲。</p>
           <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             {{GAME_CARDS}}
           </div>
@@ -37,5 +43,6 @@
     {{GAME_MODALS}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="catalog-search.js"></script>
   </body>
 </html>
