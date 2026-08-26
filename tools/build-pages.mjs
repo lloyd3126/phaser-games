@@ -91,7 +91,7 @@ const games = gameEntries.map((entry) => {
   const packageJson = JSON.parse(readFileSync(packagePath, "utf8"));
 
   ["title", "summary", "cover"].forEach((field) => requireText(manifest, field, slug));
-  ["description", "tags"].forEach((field) => requireArray(manifest, field, slug));
+  ["tags"].forEach((field) => requireArray(manifest, field, slug));
   requireTextEntries(manifest, "rules", ["text"], slug);
   if (!packageJson.scripts?.build || !packageJson.scripts?.test) {
     throw new Error(`${slug}/package.json must include build and test scripts.`);
@@ -163,9 +163,6 @@ for (const game of games) {
   const tags = manifest.tags
     .map((tag) => `<span class="badge text-bg-secondary">${escapeHtml(tag)}</span>`)
     .join("");
-  const description = manifest.description
-    .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
-    .join("");
   const rules = manifest.rules
     .map((rule) => `<p class="mb-3">${escapeHtml(rule.text)}</p>`)
     .join("\n");
@@ -196,7 +193,6 @@ for (const game of games) {
     COVER_PATH: `media/${coverName}`,
     TAGS: tags,
     SUMMARY: escapeHtml(manifest.summary),
-    DESCRIPTION: description,
     RULES: rules,
     SCREENSHOTS_SECTION: screenshotsSection,
   });
@@ -212,7 +208,10 @@ for (const game of games) {
     `<div class="d-flex flex-wrap gap-2 mb-3">${tags}</div>`,
     `<h3 class="h5 card-title">${escapeHtml(manifest.title)}</h3>`,
     `<p class="card-text text-body-secondary">${escapeHtml(manifest.summary)}</p>`,
-    `<button type="button" class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#${escapeHtml(modalId)}" aria-controls="${escapeHtml(modalId)}"><i class="bi bi-info-circle me-1" aria-hidden="true"></i>查看遊戲</button>`,
+    '<div class="d-grid gap-2 mt-auto">',
+    `<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#${escapeHtml(modalId)}" aria-controls="${escapeHtml(modalId)}">查看遊戲</button>`,
+    `<a class="btn btn-outline-primary" href="games/${publicSlug}/play/">開始遊戲</a>`,
+    '</div>',
     "</div>",
     "</article>",
     "</div>",
@@ -232,12 +231,9 @@ for (const game of games) {
     '</div>',
     `<div class="d-flex flex-wrap gap-2 mb-3">${tags}</div>`,
     `<p class="lead">${escapeHtml(manifest.summary)}</p>`,
-    `<div class="text-body-secondary mb-4">${description}</div>`,
-    '<h2 class="h5 mb-3">遊戲規則</h2>',
     `<div class="text-body-secondary">${rules}</div>`,
     '</div>',
     '<div class="modal-footer">',
-    '<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">關閉</button>',
     `<a class="btn btn-primary" href="games/${publicSlug}/play/"><i class="bi bi-play-fill me-1" aria-hidden="true"></i>開始遊戲</a>`,
     '</div>',
     '</div>',

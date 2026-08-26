@@ -1,10 +1,6 @@
 {
   "title": "Starfall Intercept",
   "summary": "駕駛戰機守住防線，在三波敵機與隕石攻勢中生存到最後。",
-  "description": [
-    "左右移動、持續向上射擊，優先處理會開火的敵機。",
-    "取得快速射擊與護盾強化，在有限生命內完成全部三個波次。"
-  ],
   "cover": "presentation/cover.png",
   "screenshots": [
     "presentation/screenshots/gameplay.png"

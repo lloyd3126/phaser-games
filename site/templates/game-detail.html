@@ -8,52 +8,53 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   </head>
-  <body class="bg-body-tertiary min-vh-100 d-flex flex-column">
-    <nav class="navbar bg-body border-bottom">
+  <body class="bg-body-tertiary vh-100 d-flex flex-column overflow-hidden">
+    <nav class="navbar bg-body border-bottom flex-shrink-0">
       <div class="container">
         <a class="navbar-brand" href="../../"><i class="bi bi-controller me-2" aria-hidden="true"></i>Phaser Games</a>
       </div>
     </nav>
 
-    <main class="container py-4 py-lg-5 flex-grow-1">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../../">所有遊戲</a></li>
-          <li class="breadcrumb-item active" aria-current="page">{{TITLE}}</li>
-        </ol>
-      </nav>
+    <div class="flex-grow-1 overflow-auto">
+      <main class="container py-4 py-lg-5">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../../">所有遊戲</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{TITLE}}</li>
+          </ol>
+        </nav>
 
-      <section class="row g-4 align-items-center mb-5">
-        <div class="col-lg-7">
-          <div class="ratio ratio-16x9 rounded overflow-hidden bg-dark">
-            <img src="{{COVER_PATH}}" class="img-fluid object-fit-cover" alt="{{TITLE}} 遊戲封面">
+        <section class="row g-4 align-items-center mb-5">
+          <div class="col-lg-7">
+            <div class="ratio ratio-16x9 rounded overflow-hidden bg-dark">
+              <img src="{{COVER_PATH}}" class="img-fluid object-fit-cover" alt="{{TITLE}} 遊戲封面">
+            </div>
           </div>
-        </div>
-        <div class="col-lg-5">
-          <div class="d-flex flex-wrap gap-2 mb-3">{{TAGS}}</div>
-          <h1 class="display-5 mb-3">{{TITLE}}</h1>
-          <p class="lead">{{SUMMARY}}</p>
-          <div class="text-body-secondary mb-4">{{DESCRIPTION}}</div>
-          <div class="d-grid d-sm-block">
-            <a class="btn btn-primary btn-lg" href="play/"><i class="bi bi-play-fill me-1" aria-hidden="true"></i>開始遊戲</a>
+          <div class="col-lg-5">
+            <div class="d-flex flex-wrap gap-2 mb-3">{{TAGS}}</div>
+            <h1 class="display-5 mb-3">{{TITLE}}</h1>
+            <p class="lead">{{SUMMARY}}</p>
+            <div class="d-grid d-sm-block">
+              <a class="btn btn-primary btn-lg" href="play/"><i class="bi bi-play-fill me-1" aria-hidden="true"></i>開始遊戲</a>
+            </div>
           </div>
+        </section>
+
+        <section class="mb-5">
+          <h2 class="h4 mb-3">遊戲規則</h2>
+          <div class="text-body-secondary">{{RULES}}</div>
+        </section>
+
+        <div class="d-flex flex-column flex-sm-row gap-3 border-top pt-4">
+          <a class="btn btn-primary" href="play/"><i class="bi bi-play-fill me-1" aria-hidden="true"></i>開始遊戲</a>
+          <a class="btn btn-outline-secondary" href="../../">返回所有遊戲</a>
         </div>
-      </section>
+      </main>
 
-      <section class="mb-5">
-        <h2 class="h4 mb-3">遊戲規則</h2>
-        <div class="text-body-secondary">{{RULES}}</div>
-      </section>
-
-      <div class="d-flex flex-column flex-sm-row gap-3 border-top pt-4">
-        <a class="btn btn-primary" href="play/"><i class="bi bi-play-fill me-1" aria-hidden="true"></i>開始遊戲</a>
-        <a class="btn btn-outline-secondary" href="../../">返回所有遊戲</a>
-      </div>
-    </main>
-
-    <footer class="border-top py-4">
-      <div class="container text-body-secondary small">{{TITLE}} · Phaser Games</div>
-    </footer>
+      <footer class="border-top py-4">
+        <div class="container text-body-secondary small">{{TITLE}} · Phaser Games</div>
+      </footer>
+    </div>
 
   </body>
 </html>
