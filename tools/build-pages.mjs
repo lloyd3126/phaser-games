@@ -234,7 +234,7 @@ for (const game of games) {
     `<div class="text-body-secondary">${rules}</div>`,
     '</div>',
     '<div class="modal-footer">',
-    `<a class="btn btn-primary" href="games/${publicSlug}/play/"><i class="bi bi-play-fill me-1" aria-hidden="true"></i>開始遊戲</a>`,
+    `<a class="btn btn-primary" href="games/${publicSlug}/play/">開始遊戲</a>`,
     '</div>',
     '</div>',
     '</div>',
